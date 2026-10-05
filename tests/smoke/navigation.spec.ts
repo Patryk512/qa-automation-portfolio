@@ -1,27 +1,95 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Home Budget - Smoke', () => {
-  test('użytkownik może otworzyć aplikację i przejść z Pulpitu do Importu', async ({ page }) => {
+test.describe('Home Budget - navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
 
-    await test.step('Otwarcie aplikacji Home Budget', async () => {
-      await page.goto('/');
-    });
+  test('opens dashboard', async ({ page }) => {
+    await expect(
+      page.getByRole('heading', { name: 'Pulpit', exact: true })
+    ).toBeVisible();
+  });
 
-    await test.step('Weryfikacja załadowania Pulpitu', async () => {
-      await expect(
-        page.getByText('Pulpit', { exact: true }).first()
-      ).toBeVisible();
-    });
+  test('opens import page', async ({ page }) => {
+    await page.getByRole('link', { name: 'Import', exact: true }).click();
 
-    await test.step('Przejście do sekcji Import', async () => {
-      await page.getByRole('link', { name: 'Import' }).click();
-    });
+    await expect(
+      page.getByRole('heading', { name: /Import wyciągu/i }).first()
+    ).toBeVisible();
+  });
 
-    await test.step('Weryfikacja widoku Import', async () => {
-      await expect(
-        page.getByRole('heading', { name: /import/i }).first()
-      ).toBeVisible();
-    });
+  test('opens import history', async ({ page }) => {
+    await page.locator('summary').filter({ hasText: 'Historia' }).click();
 
+    await page.getByRole('link', {
+      name: 'Historia importów',
+      exact: true,
+    }).click();
+
+    await expect(
+      page.getByRole('heading', {
+        name: 'Historia importów',
+        exact: true,
+      })
+    ).toBeVisible();
+  });
+
+  test('opens monthly history', async ({ page }) => {
+    await page.locator('summary').filter({ hasText: 'Historia' }).click();
+
+    await page.getByRole('link', {
+      name: 'Historia miesięczna',
+      exact: true,
+    }).click();
+
+    await expect(
+      page.getByRole('heading', {
+        name: 'Historia miesięczna',
+        exact: true,
+      })
+    ).toBeVisible();
+  });
+
+  test('opens transactions', async ({ page }) => {
+    await page.getByRole('link', {
+      name: 'Transakcje',
+      exact: true,
+    }).click();
+
+    await expect(
+      page.getByRole('heading', {
+        name: 'Transakcje',
+        exact: true,
+      })
+    ).toBeVisible();
+  });
+
+  test('opens categories', async ({ page }) => {
+    await page.getByRole('link', {
+      name: 'Kategorie',
+      exact: true,
+    }).click();
+
+    await expect(
+      page.getByRole('heading', {
+        name: 'Kategorie',
+        exact: true,
+      })
+    ).toBeVisible();
+  });
+
+  test('opens category rules', async ({ page }) => {
+    await page.getByRole('link', {
+      name: 'Reguły',
+      exact: true,
+    }).click();
+
+    await expect(
+      page.getByRole('heading', {
+        name: 'Reguły kategoryzacji',
+        exact: true,
+      }).first()
+    ).toBeVisible();
   });
 });
