@@ -1,6 +1,6 @@
-# QA Automation Portfolio
+﻿# QA Automation Portfolio
 
-Portfolio projektów z zakresu automatyzacji testów.
+Portfolio projektĂłw z zakresu automatyzacji testĂłw.
 
 ## Stack
 
@@ -13,17 +13,17 @@ Portfolio projektów z zakresu automatyzacji testów.
 
 ### Home Budget
 
-Automatyczne testy aplikacji do zarządzania budżetem domowym.
+Automatyczne testy aplikacji do zarzÄ…dzania budĹĽetem domowym.
 
 Zakres:
 - testy E2E
 - testy formularzy
-- testy importu plików
+- testy importu plikĂłw
 - testy walidacji
 - testy API
 - testy regresyjne
 
-## Uruchomienie testów
+## Uruchomienie testĂłw
 
 ```bash
 npm install
